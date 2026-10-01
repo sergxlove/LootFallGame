@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="LootFallGame.Core/LootFallGame.Core.csproj" />
+  <Project Path="LootFallGame.DataAccess.Sqlite/LootFallGame.DataAccess.Sqlite.csproj" />
+</Solution>
