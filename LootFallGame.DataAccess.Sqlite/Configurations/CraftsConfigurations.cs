@@ -8,7 +8,18 @@ namespace LootFallGame.DataAccess.Sqlite.Configurations
     {
         public void Configure(EntityTypeBuilder<CraftsEntity> builder)
         {
-            throw new NotImplementedException();
+            builder.ToTable("crafts");
+            builder.HasKey(a => a.Id);
+            builder.Property(a => a.Id)
+                .HasMaxLength(36);
+            builder.Property(a => a.IdItemResult)
+                .IsRequired()
+                .HasMaxLength(36);
+            builder.Property(a => a.QuantityResult)
+                .IsRequired();
+            builder.Property(a => a.NeedItem)
+                .IsRequired()
+                .HasMaxLength(512);
         }
     }
 }
