@@ -8,7 +8,16 @@ namespace LootFallGame.DataAccess.Sqlite.Configurations
     {
         public void Configure(EntityTypeBuilder<TerrainItemsEntity> builder)
         {
-            throw new NotImplementedException();
+            builder.ToTable("terrainsitems");
+            builder.HasKey(a => a.Id);
+            builder.Property(a => a.Id)
+                .HasMaxLength(36);
+            builder.Property(a => a.IdTerrains)
+                .IsRequired()
+                .HasMaxLength(36);
+            builder.Property(a => a.IdItems)
+                .IsRequired()
+                .HasMaxLength(36);
         }
     }
 }
