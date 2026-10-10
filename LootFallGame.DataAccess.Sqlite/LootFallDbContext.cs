@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using LootFallGame.DataAccess.Sqlite.Configurations;
+using LootFallGame.DataAccess.Sqlite.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace LootFallGame.DataAccess.Sqlite
 {
@@ -6,6 +8,13 @@ namespace LootFallGame.DataAccess.Sqlite
     {
         private readonly string _dbKey;
         private readonly string _hmacSecret;
+
+        public DbSet<CraftsEntity> CraftsTb { get; set; }
+        public DbSet<ItemsEntity> ItemsTb { get; set; }
+        public DbSet<LocationItemsEntity> LocationItemsTb { get; set; }
+        public DbSet<LocationsEntity> LocationsTb { get; set; }
+        public DbSet<TerrainItemsEntity> TerrainItemsTb { get; set; }
+        public DbSet<TerrainsEntity> TerrainsTb { get; set; }
 
         static LootFallDbContext()
         {
@@ -31,6 +40,17 @@ namespace LootFallGame.DataAccess.Sqlite
 
             options.UseSqlite(csb.ToString());
             SQLitePCL.Batteries_V2.Init();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new CraftsConfigurations());
+            modelBuilder.ApplyConfiguration(new ItemsConfigurations());
+            modelBuilder.ApplyConfiguration(new LocationItemsConfigurations());
+            modelBuilder.ApplyConfiguration(new LocationsConfigurations());
+            modelBuilder.ApplyConfiguration(new TerrainItemsConfigurations());
+            modelBuilder.ApplyConfiguration(new TerrainsConfigurations());
+            base.OnModelCreating(modelBuilder);
         }
 
     }
